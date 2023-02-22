@@ -9,7 +9,6 @@
 const url = require('url');
 const { StringDecoder } = require('string_decoder');
 const routes = require('../routes');
-// const { notFoundHandler } = require('../handlers/routeHandlers/notFoundHandler');
 const { notFoundHandler } = require('../handlers/routesHandlers/notFoundHandler');
 
 // modue scaffolding
@@ -40,9 +39,7 @@ handler.handleReqRes = (req, res) => {
     const chosenHandler = routes[trimmedPath] ? routes[trimmedPath] : notFoundHandler;
 
     chosenHandler(requestProperties, (statusCode, payload) => {
-        // eslint-disable-next-line no-param-reassign
         statusCode = typeof statusCode === 'number' ? statusCode : 500;
-        // eslint-disable-next-line no-param-reassign
         payload = typeof payload === 'object' ? payload : {};
 
         const payloadString = JSON.stringify(payload);
